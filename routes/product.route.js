@@ -62,21 +62,12 @@ productrouter.get("/top", async (req, res) => {
 })
 
 productrouter.post("/create", async (req, res) => {
-    let { token } = req.headers;
-    if (token) {
-        jwt.verify(token, 'shhhhh', async function (err, decoded) {
-            if (decoded) {
-                // req.body.user=decoded.userid;
-                ProductModel.insertMany(req.body);
-                res.send({ "msg": "Product Created" })
-            }
-            else {
-                res.send({ "msg": err })
-            }
-        });
-    }
-    else {
-        res.send({ "msg": "Please Login" })
+    
+    try {
+        ProductModel.insertMany(req.body);
+        res.send({ "msg": "Product Created" })
+    } catch (err) {
+        res.send({ "msg": err })
     }
 
 })
