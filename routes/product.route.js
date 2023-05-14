@@ -77,7 +77,7 @@ productrouter.patch("/update", authenticate, async (req, res) => {
 
 })
 
-productrouter.delete("/delete/:_id", authenticate, async (req, res) => {
+productrouter.delete("/delete/:_id", async (req, res) => {
 
     await ProductModel.findByIdAndDelete(req.params);
     res.send({ "msg": "Product Deleted" })
